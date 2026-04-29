@@ -3,7 +3,7 @@ using Leap71.ShapeKernel;
 using Leap71.LatticeLibraryExamples;
 using PicoGK;
 
-string strOutputFolder = "C:/Users/lhuir/Downloads/PicoGK_Examples-main/Examples";
+string strOutputFolder = "/workspace/LEAP71_version_KBE/PicoGK_Examples-main/Examples";
 
 
 try
