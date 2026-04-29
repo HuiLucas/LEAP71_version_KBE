@@ -1,35 +1,35 @@
-      0s    0.0+ Opened c:\Users\lhuir\Downloads\PicoGK_Examples-main\Examples\PicoGK.log
+      0s    0.0+ Opened /home/vscode/LEAP71_version_KBE/Examples/PicoGK.log
       0s    0.0+ 
       0s    0.0+ ----------------------------------------
       0s    0.0+ 
-      0s    0.0+ Current time (UTC): 2026-04-14 17:23:52 (UTC)
-      0s    0.0+ Current local time: 2026-04-14 19:23:52 (+02:00)
+      0s    0.0+ Current time (UTC): 2026-04-29 11:44:36 (UTC)
+      0s    0.0+ Current local time: 2026-04-29 11:44:36 (+00:00)
       0s    0.0+ 
       0s    0.0+ ----------------------------------------
       0s    0.0+ 
       0s    0.0+ System Info:
       0s    0.0+ 
-      0s    0.0+ Machine Name:         LAPTOP_LUCAS
-      0s    0.0+ Operating System      Microsoft Windows 10.0.26200
-      0s    0.0+ Version:              Microsoft Windows NT 10.0.26200.0
+      0s    0.0+ Machine Name:         42dbd7f9609d
+      0s    0.0+ Operating System      Ubuntu 24.04.4 LTS
+      0s    0.0+ Version:              Unix 6.6.87.2
       0s    0.0+ OS Architecture:      X64
       0s    0.0+ Proc Architecture:    X64
       0s    0.0+ 64 Bit OS:            Yes
       0s    0.0+ 64 Bit Process:       Yes
       0s    0.0+ Processor Count:      20
-      0s    0.0+ Working Set:          303MB
-      0s    0.0+ C# Framework:         .NET 10.0.5
-      0s    0.0+ C# CLR Version:       10.0.5
+      0s    0.0+ Working Set:          316MB
+      0s    0.0+ C# Framework:         .NET 10.0.7
+      0s    0.0+ C# CLR Version:       10.0.7
       0s    0.0+ PicoGK Path:          picogk.1.7
-      0s    0.0+ Command Line:         c:\Users\lhuir\miniconda3\envs\LEAP71_wrapper\python.exe -m ipykernel_launcher --f=c:\Users\lhuir\AppData\Roaming\jupyter\runtime\kernel-v31b02c6a4f9db196d0b92218dab4f1b88f25827c7.json
+      0s    0.0+ Command Line:         
       0s    0.0+ 
       0s    0.0+ ----------------------------------------
       0s    0.0+ 
       0s    0.0+ Welcome to PicoGK
       0s    0.0+ Creating Viewer
-      0s    0.2+ PicoGK:    PicoGK Core Library
+      0s    0.5+ PicoGK:    PicoGK Core Library
       0s    0.0+            1.7.1
-      0s    0.0+            2024-08-03 22:17:59 picogk.1.7
+      0s    0.0+            2024-08-03 18:24:24 picogk
       0s    0.0+ 
       0s    0.0+ VoxelSize: 0.5 (mm)
       0s    0.0+ Happy Computational Engineering!
@@ -39,12 +39,3 @@
       0s    0.0+ Starting tasks.
       0s    0.0+ 
       0s    0.0+ Loading Lights
-    241s  241.2+ STL Export: c:\Users\lhuir\Downloads\PicoGK_Examples-main\Examples\HelixHeatX_Python.STL exported.
-    241s    0.0+ Viewer Window Closed
-    241s    0.0+ 
-    241s    0.0+ ----------------------------------------
-    241s    0.0+ 
-    241s    0.0+ Closing log file.
-    241s    0.0+ Current time (UTC): 2026-04-14 17:27:53 (UTC)
-    241s    0.0+ Current local time: 2026-04-14 19:27:53 (+02:00)
-    241s    0.0+ Done.

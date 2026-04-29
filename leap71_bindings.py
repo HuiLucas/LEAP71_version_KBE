@@ -36,6 +36,8 @@ from __future__ import annotations
 
 import math
 import os
+import platform
+import shutil
 import sys
 from pathlib import Path
 from typing import Callable, Iterable
@@ -52,16 +54,63 @@ _pn_load("coreclr")
 _HERE         = Path(__file__).resolve().parent
 _PROJECT      = _HERE / "PicoGK_Examples-main"
 _BIN          = _PROJECT / "bin" / "Debug" / "net9.0"
-_NATIVE       = _BIN / "runtimes" / "win-x64" / "native"
 _PICOGK_DLL   = _BIN / "PicoGK.dll"
 _EXAMPLES_DLL = _BIN / "PicoGKExamples.dll"
 
-for _p in [_PROJECT, _BIN, _NATIVE, _PICOGK_DLL, _EXAMPLES_DLL]:
+_SYSTEM = platform.system().lower()
+_MACHINE = platform.machine().lower()
+if _SYSTEM == "windows":
+    _RID = "win-x64"
+elif _SYSTEM == "darwin" and _MACHINE in {"arm64", "aarch64"}:
+    _RID = "osx-arm64"
+elif _SYSTEM == "linux" and _MACHINE in {"x86_64", "amd64"}:
+    _RID = "linux-x64"
+else:
+    _RID = None
+
+if _RID is None:
+    raise RuntimeError(
+        "This PicoGK package does not include a native runtime for this platform "
+        f"({platform.system()} / {platform.machine()}). The package currently "
+        "contains win-x64 and osx-arm64 native binaries only, so the notebook "
+        "must be run on Windows x64 or Apple Silicon macOS, or with a PicoGK "
+        "build that provides libpicogk.1.7.so for Linux."
+    )
+
+_LOCAL_LINUX_NATIVE = Path.home() / "PicoGKRuntime" / "build" / "lib"
+if _RID == "linux-x64" and (_LOCAL_LINUX_NATIVE / "picogk.so").exists():
+    _NATIVE = _LOCAL_LINUX_NATIVE
+else:
+    _NATIVE = _BIN / "runtimes" / _RID / "native"
+
+for _p in [_PROJECT, _BIN, _PICOGK_DLL, _EXAMPLES_DLL]:
     if not Path(_p).exists():
         raise FileNotFoundError(
             f"Required path not found: {_p}\n"
             "Build the C# project with 'dotnet build' before importing this module."
         )
+
+if not _NATIVE.exists():
+    raise FileNotFoundError(
+        f"Required native runtime path not found: {_NATIVE}\n"
+        "Build the C# project with 'dotnet build' before importing this module."
+    )
+
+if _RID == "linux-x64":
+    _linux_lib = _NATIVE / "picogk.so"
+    if not _linux_lib.exists():
+        raise FileNotFoundError(
+            f"Required Linux PicoGK runtime not found: {_linux_lib}\n"
+            "Set up ~/PicoGKRuntime/build/lib/picogk.so or provide a PicoGK "
+            "package with a linux-x64 native runtime."
+        )
+    for _alias in ("libpicogk.1.7.so", "picogk.1.7.so"):
+        _target = _BIN / _alias
+        if not _target.exists():
+            try:
+                _target.symlink_to(_linux_lib)
+            except OSError:
+                shutil.copy2(_linux_lib, _target)
 
 
 # ── 3. Configure search paths and load the native PicoGK library ─────────
@@ -77,9 +126,10 @@ if hasattr(os, "add_dll_directory"):
     os.add_dll_directory(_native_str)
 
 import clr  # type: ignore[import-not-found]  # noqa: E402
+from System.Runtime.Loader import AssemblyLoadContext  # noqa: E402
 
-clr.AddReference(str(_PICOGK_DLL))
-clr.AddReference(str(_EXAMPLES_DLL))
+AssemblyLoadContext.Default.LoadFromAssemblyPath(str(_PICOGK_DLL))
+AssemblyLoadContext.Default.LoadFromAssemblyPath(str(_EXAMPLES_DLL))
 
 
 # ── 4. .NET / System types ────────────────────────────────────────────────
@@ -92,7 +142,7 @@ from System.Collections.Generic import List         # noqa: E402
 
 # ── 5. PicoGK core types ──────────────────────────────────────────────────
 
-from PicoGK import Library, Voxels, Lattice         # noqa: E402
+from PicoGK import Library, Voxels, Lattice, Mesh   # noqa: E402
 
 
 # ── 6. LEAP71 ShapeKernel types ───────────────────────────────────────────
@@ -202,6 +252,19 @@ def vox_combine_all(voxels: Iterable) -> Voxels:
     return result
 
 
+def export_voxels_to_stl(voxels: Voxels, stl_path: str | Path) -> None:
+    """
+    Export voxels as an STL without using ShapeKernel's logging wrapper.
+
+    ``Sh.ExportVoxelsToSTLFile`` calls ``Library.Log`` and therefore requires
+    ``Library.Go`` to have initialized successfully.  On Linux/headless
+    notebooks that viewer bootstrap can block, while PicoGK's direct mesh
+    export works fine.
+    """
+    mesh = voxels.mshAsMesh()
+    mesh.SaveToStlFile(str(stl_path), Mesh.EStlUnit.MM, None, Single(1.0))
+
+
 def run_in_library(
     task: Callable[[], None],
     voxel_size: float = 0.5,
@@ -211,8 +274,7 @@ def run_in_library(
     """
     Execute *task* inside PicoGK's Library.Go render environment.
 
-    Library.Go blocks the calling thread until the task completes (headless),
-    or until the viewer window is closed (non-headless).
+    Library.Go blocks the calling thread until the task completes.
 
     Parameters
     ----------
@@ -220,23 +282,20 @@ def run_in_library(
     voxel_size : voxel edge length in mm (default 0.5 mm).
     output_dir : directory where STL/screenshot files are written.
                  Defaults to <workspace>/Examples/ next to this file.
-    headless   : if True (default) no viewer window is opened and all
-                 ``Sh.PreviewVoxels`` / ``Library.oViewer()`` calls inside
-                 *task* must be omitted (they will raise NullReferenceException).
-                 Set to False to open the interactive PicoGK viewer – preview
-                 calls then work normally and screenshots can be taken.
+    headless   : kept for notebook call-site compatibility.  Preview/viewer
+                 calls inside *task* should still be guarded by this flag.
     """
     if output_dir is None:
         output_dir = _HERE / "Examples"
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
+    if headless:
+        task()
+        return
+
     Library.Go(
         Single(voxel_size),   # fVoxelSizeMM
         ThreadStart(task),    # fnTask
         str(output_dir),      # strOutputFolder
-        "",                   # strCachePath
-        "",                   # strLicenseFile
-        "",                   # strSerialNumber
-        not headless,         # bCreateViewer
     )
