@@ -76,8 +76,11 @@ if _RID is None:
         "must be run on Windows x64 or Apple Silicon macOS, or with a PicoGK "
         "build that provides libpicogk.1.7.so for Linux."
     )
-
-_LOCAL_LINUX_NATIVE = Path.home() / "PicoGKRuntime" / "build" / "lib"
+loclinnat = os.environ.get("_LOCAL_LINUX_NATIVE", None)
+if loclinnat != None and _RID == "linux-x64":
+    _LOCAL_LINUX_NATIVE = Path(loclinnat)
+else:
+    _LOCAL_LINUX_NATIVE = Path.home() / "PicoGKRuntime" / "build" / "lib"
 if _RID == "linux-x64" and (_LOCAL_LINUX_NATIVE / "picogk.so").exists():
     _NATIVE = _LOCAL_LINUX_NATIVE
 else:
