@@ -89,7 +89,7 @@ namespace Leap71
 
                 Voxels voxStructure = new Voxels(oLattice);
                 voxStructure.OverOffset(5f, 0.5f);
-                voxStructure .Smoothen(1f);
+                voxStructure.Smoothen(1f);
                 voxStructure        &= m_voxBounding;
                 return voxStructure;
             }
