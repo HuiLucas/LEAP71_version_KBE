@@ -189,7 +189,18 @@ from Leap71.ConstructionModules import (            # noqa: E402
 )
 
 
-# ── 8. Convenient enum aliases ────────────────────────────────────────────
+# ── 8. Python ↔ C# implicit bridge ───────────────────────────────────────
+#
+#  DelegateImplicit wraps a Func<Vector3, float> as IImplicit, allowing a
+#  Python function to be used wherever PicoGK expects an IImplicit SDF.
+#  Usage:
+#      impl = DelegateImplicit(Func[Vector3, Single](my_sdf_fn))
+
+from Leap71.PythonInterop import DelegateImplicit   # noqa: E402
+from System import Func                             # noqa: E402
+
+
+# ── 9. Convenient enum aliases ────────────────────────────────────────────
 
 #: Uf.ESuperShape enum values: ROUND, HEX, QUAD, TRI
 ESuperShape = Uf.ESuperShape
@@ -198,7 +209,7 @@ ESuperShape = Uf.ESuperShape
 EExport = Sh.EExport
 
 
-# ── 9. Frequently-used Vector3 constants ─────────────────────────────────
+# ── 10. Frequently-used Vector3 constants ────────────────────────────────
 
 UNIT_X: Vector3 = Vector3.UnitX
 UNIT_Y: Vector3 = Vector3.UnitY
@@ -206,7 +217,7 @@ UNIT_Z: Vector3 = Vector3.UnitZ
 ZERO:   Vector3 = Vector3.Zero
 
 
-# ── 10. Python helper functions ───────────────────────────────────────────
+# ── 11. Python helper functions ───────────────────────────────────────────
 
 
 def vec3(x: float, y: float, z: float) -> Vector3:
