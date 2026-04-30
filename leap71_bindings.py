@@ -162,6 +162,7 @@ from Leap71.ShapeKernel import (                    # noqa: E402
     # Base shapes
     BaseBox,
     BaseCylinder,
+    BasePipe,
     # Lattice shapes
     LatticeManifold,
     # Splines
