@@ -13,7 +13,17 @@ os.makedirs(xdg_dir, mode=0o700, exist_ok=True)
 os.environ['XDG_RUNTIME_DIR'] = xdg_dir
 os.environ.setdefault("GDK_BACKEND", "x11")
 os.environ.setdefault("LIBGL_ALWAYS_SOFTWARE", "1")
-os.environ.setdefault("MESA_LOADER_DRIVER_OVERRIDE", "llvmpipe")
+
+# Try OpenSWR software renderer first (more stable than llvmpipe)
+# If unavailable, fall back to llvmpipe
+os.environ['MESA_LOADER_DRIVER_OVERRIDE'] = 'swr,llvmpipe'
+
+# Aggressive workaround for Mesa shader caching bug that causes "free(): invalid pointer"
+# Completely disable all caching mechanisms
+os.environ['MESA_SHADER_CACHE'] = 'false'
+os.environ['MESA_SHADER_CACHE_DIR'] = ''
+os.environ['MESA_DISK_CACHE_DIR'] = ''
+os.environ['ZSTD_NBTHREADS'] = '1'
 
 
 # ── locate leap71_bindings.py (one directory above notebooks/) ────────────
