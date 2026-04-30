@@ -276,7 +276,7 @@ def export_voxels_to_vdb(voxels: Voxels, vdb_path: str | Path) -> None:
     notebooks that viewer bootstrap can block, while PicoGK's direct VDB
     export works fine.
     """
-    voxels.SaveToVdbFile(str(vdb_path), Single(1.0))
+    voxels.SaveToVdbFile(str(vdb_path))
 
 
 def run_in_library(

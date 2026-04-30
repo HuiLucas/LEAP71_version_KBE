@@ -2,14 +2,14 @@
       0s    0.0+ 
       0s    0.0+ ----------------------------------------
       0s    0.0+ 
-      0s    0.0+ Current time (UTC): 2026-04-30 13:50:52 (UTC)
-      0s    0.0+ Current local time: 2026-04-30 13:50:52 (+00:00)
+      0s    0.0+ Current time (UTC): 2026-04-30 14:56:20 (UTC)
+      0s    0.0+ Current local time: 2026-04-30 14:56:20 (+00:00)
       0s    0.0+ 
       0s    0.0+ ----------------------------------------
       0s    0.0+ 
       0s    0.0+ System Info:
       0s    0.0+ 
-      0s    0.0+ Machine Name:         d5fe2e93a43f
+      0s    0.0+ Machine Name:         78094785f08f
       0s    0.0+ Operating System      Ubuntu 24.04.4 LTS
       0s    0.0+ Version:              Unix 6.6.87.2
       0s    0.0+ OS Architecture:      X64
@@ -17,7 +17,7 @@
       0s    0.0+ 64 Bit OS:            Yes
       0s    0.0+ 64 Bit Process:       Yes
       0s    0.0+ Processor Count:      20
-      0s    0.0+ Working Set:          297MB
+      0s    0.0+ Working Set:          303MB
       0s    0.0+ C# Framework:         .NET 9.0.15
       0s    0.0+ C# CLR Version:       9.0.15
       0s    0.0+ PicoGK Path:          picogk.1.7
@@ -27,3 +27,23 @@
       0s    0.0+ 
       0s    0.0+ Welcome to PicoGK
       0s    0.0+ Creating Viewer
+      0s    0.4+ PicoGK:    PicoGK Core Library
+      0s    0.0+            1.7.1
+      0s    0.0+            2024-08-03 18:24:24 picogk
+      0s    0.0+ 
+      0s    0.0+ VoxelSize: 0.5 (mm)
+      0s    0.0+ Happy Computational Engineering!
+      0s    0.0+ 
+      0s    0.0+ 
+      0s    0.0+ Loading lights embedded environment
+      0s    0.0+ Starting tasks.
+      0s    0.0+ 
+      0s    0.0+ Loading Lights
+    151s  150.5+ Viewer Window Closed
+    151s    0.0+ 
+    151s    0.0+ ----------------------------------------
+    151s    0.0+ 
+    151s    0.0+ Closing log file.
+    151s    0.0+ Current time (UTC): 2026-04-30 14:58:51 (UTC)
+    151s    0.0+ Current local time: 2026-04-30 14:58:51 (+00:00)
+    151s    0.0+ Done.
