@@ -267,6 +267,17 @@ def export_voxels_to_stl(voxels: Voxels, stl_path: str | Path) -> None:
     mesh = voxels.mshAsMesh()
     mesh.SaveToStlFile(str(stl_path), Mesh.EStlUnit.MM, None, Single(1.0))
 
+def export_voxels_to_vdb(voxels: Voxels, vdb_path: str | Path) -> None:
+    """
+    Export voxels as an OpenVDB file without using ShapeKernel's logging wrapper.
+
+    ``Sh.ExportVoxelsToVDBFile`` calls ``Library.Log`` and therefore requires
+    ``Library.Go`` to have initialized successfully.  On Linux/headless
+    notebooks that viewer bootstrap can block, while PicoGK's direct VDB
+    export works fine.
+    """
+    voxels.SaveToVdbFile(str(vdb_path), Single(1.0))
+
 
 def run_in_library(
     task: Callable[[], None],
