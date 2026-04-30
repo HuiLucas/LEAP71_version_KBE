@@ -2,8 +2,8 @@
       0s    0.0+ 
       0s    0.0+ ----------------------------------------
       0s    0.0+ 
-      0s    0.0+ Current time (UTC): 2026-04-30 22:33:01 (UTC)
-      0s    0.0+ Current local time: 2026-04-30 22:33:01 (+00:00)
+      0s    0.0+ Current time (UTC): 2026-04-30 22:50:03 (UTC)
+      0s    0.0+ Current local time: 2026-04-30 22:50:03 (+00:00)
       0s    0.0+ 
       0s    0.0+ ----------------------------------------
       0s    0.0+ 
@@ -17,7 +17,7 @@
       0s    0.0+ 64 Bit OS:            Yes
       0s    0.0+ 64 Bit Process:       Yes
       0s    0.0+ Processor Count:      20
-      0s    0.0+ Working Set:          253MB
+      0s    0.0+ Working Set:          250MB
       0s    0.0+ C# Framework:         .NET 9.0.15
       0s    0.0+ C# CLR Version:       9.0.15
       0s    0.0+ PicoGK Path:          picogk.1.7
@@ -27,7 +27,7 @@
       0s    0.0+ 
       0s    0.0+ Welcome to PicoGK
       0s    0.0+ Creating Viewer
-      0s    0.4+ PicoGK:    PicoGK Core Library
+      0s    0.5+ PicoGK:    PicoGK Core Library
       0s    0.0+            1.7.1
       0s    0.0+            2024-08-03 18:24:24 picogk
       0s    0.0+ 
@@ -39,11 +39,11 @@
       0s    0.0+ Starting tasks.
       0s    0.0+ 
       0s    0.0+ Loading Lights
-    244s  243.6+ Viewer Window Closed
-    244s    0.0+ 
-    244s    0.0+ ----------------------------------------
-    244s    0.0+ 
-    244s    0.0+ Closing log file.
-    244s    0.0+ Current time (UTC): 2026-04-30 22:37:05 (UTC)
-    244s    0.0+ Current local time: 2026-04-30 22:37:05 (+00:00)
-    244s    0.0+ Done.
+     44s   43.5+ Viewer Window Closed
+     44s    0.0+ 
+     44s    0.0+ ----------------------------------------
+     44s    0.0+ 
+     44s    0.0+ Closing log file.
+     44s    0.0+ Current time (UTC): 2026-04-30 22:50:47 (UTC)
+     44s    0.0+ Current local time: 2026-04-30 22:50:47 (+00:00)
+     44s    0.0+ Done.
